@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>555 Component Picker</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body class="mode-astable">
+        <h1>555 Component Picker</h1>
+        <p>
+            This tool helps you find matching common resistor and capacitor
+            values for a desired oscillation of the 555 timer IC.
+        </p>
+        <h3>
+            Mode:
+            <select id="modeSelect">
+                <option value="astable" selected>Astable</option>
+                <option value="monostable">Monostable</option>
+            </select>
+        </h3>
+        <p class="info-astable">
+            Fill out any 2 of the fields below (but not both Frequency and
+            Period) to set the oscillation Parameters:
+        </p>
+        <p class="info-mstable">Set the desired pulse length below:</p>
+        <img src="assets/555a.png" id="img555a" alt="555 astable circuit" />
+        <img src="assets/555m.png" id="img555m" alt="555 monostable circuit" />
+
+        <div id="waveForm" class="hidden"></div>
+        <div id="allInps">
+            <select id="unitFreq">
+                <option value="-3">mHz</option>
+                <option value="0" selected>Hz</option>
+                <option value="3">kHz</option>
+                <option value="6">MHz</option>
+            </select>
+            <div>
+                <label for="inpFreq">Frequency</label>
+                <input type="number" id="inpFreq" />
+            </div>
+
+            <div class="break"></div>
+            <select id="unitProp">
+                <option value="0">0-1</option>
+                <option value="-2" selected>%</option>
+                <option value="-3">‰</option>
+            </select>
+            <div>
+                <label for="inpDuty">Duty Cycle</label>
+                <input type="number" id="inpDuty" />
+            </div>
+            <div class="break"></div>
+            <select id="unitTime" class="keep-mstable">
+                <option value="-6">µs</option>
+                <option value="-3" selected>ms</option>
+                <option value="0">s</option>
+            </select>
+            <div>
+                <label for="inpPeriod">Period</label>
+                <input type="number" id="inpPeriod" />
+            </div>
+            <div class="keep-mstable">
+                <label for="inpTHigh"> THigh </label>
+                <input type="number" id="inpTHigh" />
+            </div>
+            <div>
+                <label for="inpTLow"> TLow </label>
+                <input type="number" id="inpTLow" />
+            </div>
+            <div class="break"></div>
+            <button id="butClear">Clear</button>
+            <span id="warningDuty" class="hidden">
+                Inputted duty cycle below 50%: The 555 IC can't output waveforms
+                with &lt;50% duty cycle, calculations will be done with the
+                inverted waveform. Add a not-gate to the output to obtain the
+                desired oscillation
+            </span>
+        </div>
+        <div id="results">
+            <h3>Possible resistor-capacitor combinations:</h3>
+            <div id="resultsContainer">
+                <p>
+                    <a href="standard.txt" id="PLLink">part list:</a>
+                    <select id="chooseList">
+                        <option value="standard" selected>standard</option>
+                        <option value="reduced">reduced</option>
+                    </select>
+                    &ThickSpace;max number of calculated results:
+                    <select id="chooseAmount">
+                        <option value="10">10</option>
+                        <option value="50" selected>50</option>
+                        <option value="100">100</option>
+                        <option value="250">250</option>
+                    </select>
+                </p>
+                <div id="resultEntries"></div>
+                <button id="butExpandResults" class="hidden">
+                    show more ...
+                </button>
+            </div>
+        </div>
+        <script src="calcs.js"></script>
+        <script src="main.js"></script>
+    </body>
+</html>
