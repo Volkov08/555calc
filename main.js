@@ -64,7 +64,7 @@ function loadFromText(r) {
             continue;
         }
         let val = parseValue(line);
-        [resistors, capacitors][RorC].push(val);
+        [resistors, capacitors][RorC].push(val);Pending: Vote to unlo
     }
     console.log("Done loading file");
     fillInputs();
@@ -371,6 +371,8 @@ function freeInputs(keep = null) {
 }
 function clearInputs() {
     filledOut = 0;
+    driving = {};
+    drivingKeys = [];
     for (let id of paramIDs) {
         let elem = document.getElementById("inp" + id);
         elem.value = "";
