@@ -64,7 +64,7 @@ function loadFromText(r) {
             continue;
         }
         let val = parseValue(line);
-        [resistors, capacitors][RorC].push(val);Pending: Vote to unlo
+        [resistors, capacitors][RorC].push(val);
     }
     console.log("Done loading file");
     fillInputs();
